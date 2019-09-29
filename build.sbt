@@ -1,23 +1,24 @@
 name := """play-quill-jdbc"""
 
-version := "1.0-SNAPSHOT"
+version := "0.2.0"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.12.10"
 
 libraryDependencies ++= Seq(
   jdbc,
-  cache,
+  //cacheApI,
+  evolutions,
   ws,
-  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.0-RC1" % Test,
-  "com.h2database" % "h2" % "1.4.190",
-  "io.getquill" %% "quill-jdbc" % "1.1.0",
-  "com.typesafe.play" % "play-jdbc-evolutions_2.11" % "2.5.12"
+  "com.typesafe.play"      %% "twirl-api"            % "1.4.2"   withSources(),
+  "com.h2database"         %  "h2"                   % "1.4.199" withSources(),
+  "io.getquill"            %% "quill-jdbc"           % "3.4.9"   withSources(),
+  //
+  "org.scalatestplus.play" %% "scalatestplus-play"   % "4.0.3"   % Test
 )
 
 resolvers ++= Seq(
-  "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 )
 
 routesGenerator := InjectedRoutesGenerator

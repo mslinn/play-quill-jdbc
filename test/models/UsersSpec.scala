@@ -12,7 +12,7 @@ class UsersSpec extends WordSpec with OneAppPerTest {
 
   "Users" should {
     "create and find" in {
-      val users = app.injector.instanceOf(classOf[Users])
+      val users = app.injector.instanceOf(classOf[UserDAO])
       val user = users.create(User(0L, "test1", true))
       user.id !== 0L
       val userFound = users.find(user.id)

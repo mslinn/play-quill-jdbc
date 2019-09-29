@@ -6,7 +6,7 @@ import play.api.Application
 import play.api.libs.json.Json
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import models.{User, Users}
+import models.{User, UserDAO}
 import test._
 
 import scala.util.Random
@@ -17,7 +17,7 @@ class UsersControllerSpec extends PlaySpec with OneAppPerTest {
 
   "GET /users/:id" should {
     "return 200 OK with body" in {
-      val users = app.injector.instanceOf(classOf[Users])
+      val users = app.injector.instanceOf(classOf[UserDAO])
       val name = s"Name${Random.nextLong()}"
       val user = users.create(User(0, name, true))
       val response = route(app, FakeRequest(GET, s"/users/${user.id}")).get
@@ -42,7 +42,7 @@ class UsersControllerSpec extends PlaySpec with OneAppPerTest {
 
   "DELETE /users/:id" should {
     "return 204 No Content and delete resource" in {
-      val users = app.injector.instanceOf(classOf[Users])
+      val users = app.injector.instanceOf(classOf[UserDAO])
       val name = s"Name${Random.nextLong()}"
       val user = users.create(User(0, name, true))
       val response = route(app, FakeRequest(DELETE, s"/users/${user.id}")).get
@@ -53,7 +53,7 @@ class UsersControllerSpec extends PlaySpec with OneAppPerTest {
 
   "PUT /users/:id" should {
     "return 204 No Content and update resource" in {
-      val users = app.injector.instanceOf(classOf[Users])
+      val users = app.injector.instanceOf(classOf[UserDAO])
       val name = s"Name${Random.nextLong()}"
       val user = users.create(User(0, name, true))
       val updatedName = s"Name${Random.nextLong()}"
